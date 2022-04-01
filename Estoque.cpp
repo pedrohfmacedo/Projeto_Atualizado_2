@@ -13,16 +13,17 @@ Estoque::Estoque(){
 		while(!arquivo.eof())  // enquanto não for fim de arquivo...
 		{
 
-			getline(arquivo, tipo_aux);
+			getline(arquivo, nome_aux);
 
 			if (arquivo.eof()){
 				break;
 
-			getline(arquivo, nome_aux);
-			arquivo >> cor_aux;
+			getline(arquivo, tipo_aux);
+			getline(arquivo, cor_aux);
+			getline(arquivo, codigo_aux);			
+			arquivo >> precoVenda_aux;
 			arquivo >> precoFabrica_aux;
 			arquivo >> quantidade_aux;
-			arquivo >> codigo_aux;
 			
 			Percussao aux(nome_aux, cor_aux, codigo_aux, precoVenda_aux, precoFabrica_aux, quantidade_aux, tipo_aux); //cria um objeto de percussao com os dados lidos no arquivo
 			Lista_Percussao.push_back(aux);  //insere o objeto percussao na lista
@@ -30,8 +31,8 @@ Estoque::Estoque(){
 			}
 		}
 		arquivo.close(); //fecha o 
-		
 		ifstream arquivo; // arquivo de leitura
+		
 		arquivo.open("Cordas.txt"); // abre arquivo
 
 		string nome_aux, cor_aux, codigo_aux;
@@ -48,11 +49,11 @@ Estoque::Estoque(){
 				if (arquivo.eof()){
 					break;
 					
-            	arquivo >> quantidadecordas_aux;
-				arquivo >> cor_aux;
+   				getline(arquivo, cor_aux);
+				getline(arquivo, codigo_aux);
+				arquivo >> precoVenda_aux;
 				arquivo >> precoFabrica_aux;
 				arquivo >> quantidade_aux;
-				arquivo >> codigo_aux;
 
 				Cordas aux(nome_aux, cor_aux, codigo_aux, precoVenda_aux, precoFabrica_aux, quantidade_aux, quantidadecordas_aux); //cria um objeto de percussao com os dados lidos no arquivo
 			   	Lista_Cordas.push_back(aux);  //insere o objeto percussao na lista
@@ -156,7 +157,7 @@ bool Estoque::pesquisarCordas(string codigo) {
 	
 }
 
-bool Estoque::salvarPercussao(){
+void Estoque::salvarPercussao(){
 	
 	ofstream arquivo; //arquivo de escrita
 	arquivo.open("Percussao.txt"); // abre arquivo
@@ -166,13 +167,14 @@ bool Estoque::salvarPercussao(){
 		for (int i = 0; i < Lista_Percussao.size(); i++)
 		{
 			arquivo << Lista_Percussao[i].get_nome() << endl;
+			arquivo << Lista_Percussao[i].get_tipo() << endl;
+			arquivo << Lista_Percussao[i].get_cor() << endl;
+			arquivo << Lista_Percussao[i].get_codigo() << endl;
 			arquivo << Lista_Percussao[i].get_precoVenda() << endl;
 			arquivo << Lista_Percussao[i].get_precoFabrica() << endl;
 			arquivo << Lista_Percussao[i].get_quantidade() << endl;
-			arquivo << Lista_Percussao[i].get_cor() << endl;
-			arquivo << Lista_Percussao[i].get_codigo() << endl;
-			arquivo.close(); //fecha arquivo
 		}
+		arquivo.close(); //fecha arquivo
 	}
 	else
 	{
@@ -180,7 +182,7 @@ bool Estoque::salvarPercussao(){
 	}	
 }
 
-bool Estoque::salvarCordas(){
+void Estoque::salvarCordas(){
 	ofstream arquivo; //arquivo de escrita
 	arquivo.open("Cordas.txt"); // abre arquivo
 
@@ -189,13 +191,14 @@ bool Estoque::salvarCordas(){
 		for (int i = 0; i < Lista_Cordas.size(); i++)
 		{
 			arquivo << Lista_Cordas[i].get_nome() << endl;
+			arquivo << Lista_Cordas[i].get_cor() << endl;
+			arquivo << Lista_Cordas[i].get_codigo() << endl;
 			arquivo << Lista_Cordas[i].get_precoVenda() << endl;
 			arquivo << Lista_Cordas[i].get_precoFabrica() << endl;
 			arquivo << Lista_Cordas[i].get_quantidade() << endl;
-			arquivo << Lista_Cordas[i].get_cor() << endl;
-			arquivo << Lista_Cordas[i].get_codigo() << endl;
-			arquivo.close(); //fecha arquivo
+			
 		}
+		arquivo.close(); //fecha arquivo
 	}
 	else
 	{
@@ -342,7 +345,6 @@ void Estoque::imprimeCordas()
 			cout << endl;
 		}
 }
-
 
 Estoque::~Estoque(){
 	salvarPercussao();
