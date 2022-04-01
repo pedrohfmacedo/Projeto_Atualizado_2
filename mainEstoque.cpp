@@ -15,6 +15,7 @@ int main(){
 	int opcao, qtd, cordas;
 	string color, code,name, type, seleciona;
 	float valor_f, valor_v;
+	    Estoque MUSIDOM;
 	
 do {	
 	cout << "1)  CADASTRAR PRODUTO PERCUSSAO" << endl
@@ -27,14 +28,13 @@ do {
 	 << "8)  PESQUISAR PRODUTO CORDAS" << endl
 	 << "9)  ORGANIZAR SESSAO DE PERCUSSAO" << endl
 	 << "10) ORGANIZAR SESSAO DE CORDAS" << endl
-	 << "11) ACRESCENTAR QUANTIDADE (PERCUSSAO) " <<endl
-	 << "12) ACRESCENTAR QUANTIDADE (CORDAS): " <<endl
-	 << "13) TIRAR QUANTIDADE (PERCUSSAO)" <<endl
-	 << "14) TIRAR QUANTIDADE (CORDAS): " <<endl
-	 << "15) ENCERRAR PROGRAMA: " <<endl;
+	 << "11) ACRESCENTAR QUANTIDADE (PERCUSSAO) " << endl
+	 << "12) ACRESCENTAR QUANTIDADE (CORDAS): " << endl
+	 << "13) TIRAR QUANTIDADE (PERCUSSAO)" << endl
+	 << "14) TIRAR QUANTIDADE (CORDAS): " << endl
+	 << "15) ENCERRAR PROGRAMA: " << endl;
 	cout<<"Digite a opçao desejeda: ";
 	cin>>opcao;
-	 Estoque MUSIDOM;
 	switch(opcao)
 	{
 	case 1:
@@ -57,14 +57,17 @@ do {
 			cout<<endl;
 			
 			Percussao perc(name, color, code, valor_v, valor_f, qtd, type);
-			MUSIDOM.inserirPercussao(perc);
+			if(MUSIDOM.inserirPercussao(perc)){
+				
+			}
+			MUSIDOM.salvarPercussao();	
 			cout << "PRODUTO CADASTRADO COM SUCESSO!" <<endl << endl;
 			break;
 	}
 		
 	case 2:
 	{
-			cout << "CADASTRE PRODUTO PERCUSSAO" << endl << endl;
+			cout << "CADASTRE PRODUTO CORDAS" << endl << endl;
 			cout << "NOME : ";
 			cin >> name;
 			cout << "COR: ";
@@ -88,8 +91,9 @@ do {
 	}
 	case 3:{
 			cout << "-------- PERCUSSAO -------- " << endl << endl;
-
+			
 				MUSIDOM.imprimePercussao();
+				
 				cout << "DIGITE O CÓDGIO DO PRODUTO PARA REMOÇÃO" << endl;
 				cin >> seleciona;
 				if (MUSIDOM.removerPercussao(seleciona)){
