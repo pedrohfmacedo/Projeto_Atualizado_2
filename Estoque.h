@@ -16,21 +16,20 @@ public:
 	Estoque();
 	~Estoque();
     // Método para inserir produto
-    bool inserirPercussao(Percussao); //
+    bool inserirPercussao(Percussao);
     bool inserirCordas(Cordas);
 
     // Método para remover produto
-    bool removerPercussao(string); //
+    bool removerPercussao(string); 
     bool removerCordas(string);
 
     // Métodos para pesquisar produto
-    bool pesquisarPercussao(string) ; //
+    bool pesquisarPercussao(string) ; 
     bool pesquisarCordas(string) ;
 
-
     // Método para salvar produto
-    bool salvarPercussao();					//
-    bool salvarCordas();
+    void salvarPercussao();					
+    void salvarCordas();
 
 	bool set_SaidaEstoquePercussao(string, int);
 	bool set_EntradaEstoquePercussao(string, int);
@@ -44,7 +43,7 @@ public:
 	// Método para ordenar produto
     void ordenaPercussao(); //
     void ordenaCordas();
-
+    
 	int get_indicePercussao(string) const; //
 	int get_indiceCordas(string) const;
 	
